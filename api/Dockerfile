@@ -2,8 +2,7 @@ FROM ruby
 
 RUN apt-get update -qq && apt-get install -y postgresql-client
 
-RUN adduser rails
-USER rails
+USER root
 
 COPY src/bin/entrypoint.sh /home/rails/entrypoint.sh
 COPY src/ /app

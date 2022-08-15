@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: ratings
+#
+#  id         :integer          not null, primary key
+#  uuid       :string
+#  user_id    :integer          not null
+#  recipe_id  :integer          not null
+#  rating     :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  uuid: MyString
+  user: one
+  recipe: one
+  rating: 1
+
+two:
+  uuid: MyString
+  user: two
+  recipe: two
+  rating: 1

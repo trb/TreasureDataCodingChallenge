@@ -1,12 +1,15 @@
 services:
   api:
     build: api
-    # comment this out when not running docker rootless
+    # when running docker rootless, weird uid issues can prop up when not
+    # running the image as root. this isn't a security concern as with
+    # docker-rootless the "root" user is translated to the user running
+    # root anyhow.
+
+    # comment this out when not running docker in rootless mode
     user: root
     volumes:
       - ./api/src:/app
       - ./api/gems:/gems
     ports:
       - "5000:5000"
-    depends_on:
-      - database

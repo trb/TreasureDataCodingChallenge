@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: recipes
+#
+#  id          :integer          not null, primary key
+#  uuid        :string
+#  name        :string
+#  description :string
+#  process     :text
+#  user_id     :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+one:
+  uuid: MyString
+  name: MyString
+  description: MyString
+  process: MyText
+  user: one
+
+two:
+  uuid: MyString
+  name: MyString
+  description: MyString
+  process: MyText
+  user: two

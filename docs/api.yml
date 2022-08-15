@@ -16,8 +16,10 @@ components:
             type: array
             items:
               type: object
-              name: string
-              amount: string
+              properties:
+                name: string
+                amount: string
+                measurement_type: weight | volume | count
           ratings:
             type: array
             items:
@@ -48,7 +50,7 @@ paths:
                     uuid: string
                     name: string
                     description: string
-                    author:
+                    user:
                       type: object
                       properties:
                         uuid: string
@@ -82,7 +84,7 @@ paths:
                           type: string
                           description: The amount in free-form text
                           example: '"2 bananas" or "1 cup flour" or "250g raisins", etc'
-                author:
+                user:
                   type: string
                   description: The uuid of the author
 
@@ -128,3 +130,17 @@ paths:
       responses:
         204:
           description: Recipe was successfully deleted
+
+  /ratings:
+    post:
+      summary: Create a rating for a recipe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_uuid: string
+                recipe_uuid: string
+                rating: number

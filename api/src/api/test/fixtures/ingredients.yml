@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: ingredients
+#
+#  id                :integer          not null, primary key
+#  uuid              :string
+#  name              :string
+#  calories_per_100g :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
+one:
+  uuid: MyString
+  name: MyString
+  calories_per_100g: 1
+
+two:
+  uuid: MyString
+  name: MyString
+  calories_per_100g: 1

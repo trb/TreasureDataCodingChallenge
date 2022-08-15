@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: recipe_ingredients
+#
+#  id               :integer          not null, primary key
+#  uuid             :string
+#  amount           :string
+#  ingredient_id    :integer          not null
+#  recipe_id        :integer          not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  measurement_type :string
+#
+
+one:
+  uuid: MyString
+  amount: MyString
+  amount_is_count: false
+  ingredient: one
+  recipe: one
+
+two:
+  uuid: MyString
+  amount: MyString
+  amount_is_count: false
+  ingredient: two
+  recipe: two
