@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Recipe API
+  description: A simple api to manage recipes
+
+components:
+  schemas:
+    Recipe:
+      type: object
+        $ref:
+        properties:
+          name: string
+          description: string
+          process: string
+          ingredients:
+            type: array
+            items:
+              type: object
+              name: string
+              amount: string
+          ratings:
+            type: array
+            items:
+              type: object
+              user:
+                type: object
+                properties:
+                  uuid: string
+                  name: string
+              rating:
+                type: number
+                description: The rating the user gave
+
+paths:
+  /recipes:
+    get:
+      summary: Returns a list of recipes
+      responses:
+        200:
+          description: A json array representing a list of recipes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    uuid: string
+                    name: string
+                    description: string
+                    author:
+                      type: object
+                      properties:
+                        uuid: string
+                        name: string
+    post:
+      summary: Creates a new recipe
+      responses:
+        200:
+          description: Recipe successfully create
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: string
+                description: string
+                process: string
+                ingredients:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name: string
+                      amount:
+                          type: string
+                          description: The amount in free-form text
+                          example: '"2 bananas" or "1 cup flour" or "250g raisins", etc'
+                author:
+                  type: string
+                  description: The uuid of the author
+
+  /recipes/{recipeUuid}:
+    get:
+      summary: Returns a full recipe object
+      responses:
+        200:
+          description: A JSON object representing a recipe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+
+    put:
+      summary: Updates a recipe
+      description: This updates a recipe to the representation given in the request payload. Not all field are updatable (e.g. author and ratings aren't)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: string
+                description: string
+                process: string
+                ingredients:
+                  type: object
+                  properties:
+                    name: string
+                    amount: string
+      responses:
+        200:
+          description: Successfully updated the recipe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+
+    delete:
+      summary: Deletes a recipe
+      responses:
+        204:
+          description: Recipe was successfully deleted

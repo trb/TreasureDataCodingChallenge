@@ -1,5 +1,6 @@
 # Project-specific
 .iml
+api/gems/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
