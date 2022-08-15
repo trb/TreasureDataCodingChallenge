@@ -2,7 +2,29 @@
 
 A simple api to manage recipes and ingredients.
 
-# Design decisions
+## Running the app
+This _should_ work by using docker-compose to start the app by running this command:
+
+`docker-compose -f "$(pwd)/docker-compose.yml" up --remove-orphans --force-recreate --renew-anon-volumes $1`
+
+I use a rootless docker setup, my helper scripts in /bin prefix all commands with
+`sudo docker-user` which won't work if that user doesn't exist. If you're not running
+rootless docker with an account called `docker-user`, just ignore those scripts.
+
+## Testing
+I believe end-to-end tests are the most valuable tests as they cover the most parts of the
+application. To save time I simply wrote a short python script to run through all the api
+endpoints, starting with creating a user to deleting the recipe.
+
+The test is found in api/test/end_to_end.py
+
+Cleanup isn't really handled well, and it's using the development environment, both things
+that I would address in a real app.
+
+I'd also unit tests as they're usually faster, and support more localized testing which I find
+very helpful, but due to time constraints I skipped them.
+
+## Design decisions
 
 **No authentication** - the small scope of this project requires trade-offs, and proper authentication
 often has edge cases. For future development, I'd recommend token-based authentication using something
@@ -25,3 +47,6 @@ transaction fails due to serialization errors.
 to manage them. Ingredients will be an array in the create-recipe payload, and individual ingredient
 entries in the database will be matched simply by name. If no ingredient with the name is found, a new
 ingredient is created.
+
+**Validation** - in a production environment the api data should be validated, and there should
+be proper error handling, but I ran out of time.
