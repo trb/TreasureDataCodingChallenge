@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DEPS="--no-deps"
+if [ "$2" == "--with-deps" ];
+  then
+    DEPS=""
+fi
+
+sudo -i -u docker-user docker-compose -f "$(pwd)/docker-compose.yml" run --entrypoint "sh -c 'if command -v bash; then bash; else ash; fi'" $DEPS $1

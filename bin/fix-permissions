@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo chown -R thomas.docker-user {bin,docs,ecstest,everythingserver,frontend,jupyter}
+sudo chmod g+w -R  {bin,docs,ecstest,everythingserver,frontend,jupyter}

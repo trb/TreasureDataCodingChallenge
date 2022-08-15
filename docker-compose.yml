@@ -1,0 +1,22 @@
+services:
+  database:
+    image: "postgres:alpine"
+    restart: "always"
+    environment:
+      POSTGRES_PASSWORD: "ZVqMLIFf6vreDpsxNqOBTxBfNLOrfIn9tvCZ9jYf2KgOUkfaaOmAEFYAfhfn2diy"
+      POSTGRES_HOST_AUTH_METHOD: "scram-sha-256"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - "./database/data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+  api:
+    build: api
+    volumes:
+      - ./api/src:/app
+      - ./api/gems:/gems
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
